@@ -3,47 +3,34 @@ Hybrid-Emba3D: Geometry-Aware and Cross-Path Feature Hybrid Enhanced State Space
 
 We will release the code and data soon!
 
+## Experimental Results on ModelNet40 and ScanObjectNN
+This table compares the performance of different 3D point cloud architectures on ModelNet40 and ScanObjectNN datasets. Our Hybrid-Emba3D achieves state-of-the-art results with:
+- 🏆95.99% accuracy on ModelNet40
+- 94.34% on hardest PB_T50_RS variant
+- Maintains low computational cost (3.95G FLOPs)
+﻿
+*For detailed experimental settings and citations, please refer to the original paper.*
 
 
-\begin{table*}[!ht]
-	\centering
-	\caption{ Experimental results of ModelNet40 and ScanObjectiNN. Compared with methods of different architectures: \textcolor{red}{•} Point-wise aggregation architectures,  \textcolor{green}{•} Transformer-based architectures, •Diffusion-driven frameworks,  \textcolor{cyan}{•}Mamba-based architectures. \textcolor{magenta}{*} denotes the application of voting strategy. The results of other models are sourced from publicly published papers.}
-	
-	\resizebox{\textwidth}{!}{
-	\begin{tabular}{lccccccccc}
-		\toprule
-		\multirow{2}{*}{Methods}                                      & \ \multirow{2}{*}{Reference} & \multirow{2}{*}{\makecell{ Pre-training\\strategy} } & \multirow{2}{*}{\makecell{ModelNet40\\1k P} } &                                                \multicolumn{3}{c}{ScanObjectNN}                                                & \multirow{2}{*}{P (M)} & \multirow{2}{*}{F (G)} &  \\ \cmidrule
-		(l){5-7}
-~                                                    &              ~               &                                                      &                                               &                 OBJ\_BG                  &                 OBJ\_ONL                 &               PB\_T50\_RS                &           ~            &           ~            &  \\ \hline
-		                                                                                                                                                            \multicolumn{9}{c}{\textbf{\textit{Supervised Learning Only}}}                                                                                                                                                             &  \\ \hline
-		\textcolor{red}{•}PointNet\cite{pointnet}                                 &           CVPR 17            &                          ×                           &                     89.2                      &                   73.3                   &                   79.2                   &                   68.0                   &          3.5           &          0.5           &  \\
-		\textcolor{red}{•}PointNet++\cite{PointNet2}                               &          NeurIPS 17          &                          ×                           &                     90.7                      &                   82.3                   &                   84.3                   &                   77.9                   &          1.5           &          1.7           &  \\
-		\textcolor{red}{•}DGCNN\cite{dgcnn}                                     &            TOG 19            &                          ×                           &                     92.9                      &                   82.8                   &                   86.2                   &                   78.1                   &          1.8           &          2.4           &  \\
-		\textcolor{red}{•}DRNet\cite{DRNet}                              &           WACV-21            &                          ×                           &                     93.1                      &                    -                     &                    -                     &                   80.3                   &           -            &           -            &  \\
-		\textcolor{red}{•}MVTN\cite{MVTN}\textcolor{red}{}              &           ICCV 21            &                          ×                           &                     93.8                      &                   92.6                   &              \textbf{92.3}               &                   82.8                   &          11.2          &          43.7          &  \\
-		\textcolor{red}{•}PointMLP\cite{pointmlp}                           &           ICLR 22            &                      ×\textbf{}                      &                 \textbf{94.5}                 &                    -                     &                    -                     &                 85.4±0.3                 &          12.6          &          31.4          &  \\
-		\textcolor{red}{•}PointNeXt\cite{PointNeXt}                          &          NeurIPS 22          &                          ×                           &                     92.9                      &                    -                     &                    ~                     &                 87.7±0.4                 &          1.4           &          3.6           &  \\
-		\textcolor{green}{•}Transformer\cite{Transformer}                             &          NeurIPS 17          &                          ×                           &                     94.1                      &                  79.86                   &                  80.55                   &                  77.24                   &          22.1          &          4.8           &  \\
-		\textcolor{green}{•}PointConT\cite{pointcont}                        &            JAS 23            &                          ×                           &                     93.5                      &                    -                     &                    -                     &                  90.30                   &           -            &           -            &  \\
+| Methods               | Architecture Type       | ModelNet40<br>(1k P) | ScanObjectNN  	 | | 	  | Params<br>(M) | FLOPs<br>(G) |
+|-----------------------|-------------------------|----------------------|---------|----------|-----------|---------------|--------------|
+|                       |                         |                      | OBJ_BG  | OBJ_ONLY | PB_T50_RS |               |              |
+| **Supervised Learning Only**                                                                 |
+| PointNet              | Point-wise              | 89.2                 | 73.3    | 79.2     | 68.0      | 3.5          | 0.5          |
+| PointNet++            | Point-wise              | 90.7                 | 82.3    | 84.3     | 77.9      | 1.5          | 1.7          |
+| DGCNN                 | Point-wise              | 92.9                 | 82.8    | 86.2     | 78.1      | 1.8          | 2.4          |
+| MVTN                  | Multi-view              | 93.8                 | 92.6    | 92.3     | 82.8      | 11.2         | 43.7         |
+| PointMLP              | Point-wise              | 94.5                 | -       | -        | 85.4      | 12.6         | 31.4         |
+| Transformer           | Transformer       	  | 94.1                 | 79.9    | 80.6     | 77.2      | 22.1         | 4.8          |
+| PointConT             | Transformer       	  | 93.5                 | -       | -        | 90.3      | -            | -            |
+| Mamba3D               | Mamba           	  | 93.4                 | 92.9    | 92.1     | 91.8      | 16.9         | 3.9          |
+| **Hybrid-Emba3D**     | Mamba           	  | 94.0                 | 93.6    | 92.3     | 91.1      | 16.96        | 3.95         |
+| **With Pre-training**                                                                        |
+| Point-BERT*           | Transformer     	  | 93.4                 | 88.1    | 88.3     | 83.7      | 23.8         | 4.8          |
+| Point-MAE*            | Transformer     	  | 94.4                 | 91.2    | 90.0     | 84.9      | 23.8         | 4.8          |
+| Point-FMAE*           | Transformer     	  | 95.2                 | 95.2    | 93.3     | 90.2      | 27.4         | 3.6          |
+| Mamba3D*              | Mamba           	  | 95.1                 | 95.2    | 92.6     | 93.3      | 16.9         | 3.9          |
+| **Hybrid-Emba3D***    | Mamba            	  | **95.99** 🏆         | 95.2    | 93.8     | 94.3     | 16.96        | 3.95         |
 
-		\textcolor{cyan}{•}Pointmamba\cite{PointMamba}                               &          NeurIPS24           &                          ×                           &                       -                       &                  88.30                   &                  87.78                   &                  82.48                   &          12.3          &          3.6           &  \\
-		\textcolor{cyan}{•}Mamba3D\cite{Mamba3D}                                  &           ACM MM24           &                          ×                           &                     93.4                      &                  92.94                   &                  92.08                   &                  \textbf{91.81}                   &          16.9          &          3.9           &  \\
-		\textcolor{cyan}{•}Hybrid-Emba3D                              &              ~               &                          ×                           &                     94.0                      &              \textbf{93.63}              &                  92.25                   &                  91.05                   &         16.96          &          3.95          &  \\ \hline
-		                                                                                                                                                       \multicolumn{9}{c}{\textbf{\textit{With Self-supervised Pre-training}}}                                                                                                                                                         &  \\ \hline
-		\textcolor{green}{•}Transformer\cite{Transformer}                             &          NeurIPS 17          &                         OcCo                         &                     92.1                      &                  84.85                   &                  85.54                   &                  78.79                   &          22.1          &          4.8           &  \\
-		\textcolor{green}{•}MaskPoint\cite{MaskPoint}                            &           CVPR 22            &                      MaskPoint                       &                     93.8                      &                  89.30                   &                  88.10                   &                  84.30                   &          22.1          &          4.8           &  \\
-		\textcolor{green}{•}Point-BERT\textcolor{magenta}{*}\cite{Point-BERT}      &           CVPR 22            &                         IDPT                         &                     93.4                      &                  88.12                   &                  88.30                   &                  83.69                   &        22.1+1.7        &          4.8           &  \\
-		\textcolor{green}{•}Point-MAE\textcolor{magenta}{*}\cite{point-mae}        &           ECCV 22            &                         IDPT                         &                     94.4                      &                  91.22                   &                  90.02                   &                  84.94                   &        22.1+1.7        &          4.8           &  \\
-		\textcolor{green}{•}PointGPT-S\textcolor{magenta}{*}\cite{Pointgpt}      &          NeurIPS 23          &                          ~                           &                     94.0                      &                   91.6                   &                   90.0                   &                   86.9                   &          29.2          &          5.7           &  \\
-		\textcolor{green}{•}Point-FMAE\textcolor{magenta}{*}\cite{point-Fmae}      &           AAAI 24            &                      Point-M2AE                      &                     95.15                     &              \textbf{95.18}              &                  93.29                   &                  90.22                   &          27.4          &          3.6           &  \\
-		\textcolor{black}{•}PointDif\cite{pointdif}            &           CVPR 24            &                       PointDif                       &                       -                       &                  93.29                   &                  91.91                   &                  87.61                   &           -            &           -            &  \\
-		\textcolor{cyan}{•}Pointmamba\cite{PointMamba}                               &          NeurIPS 24          &                      Point-MAE                       &                     93.6                      &                  94.32                   &                  92.60                   &                  89.31                   &          12.3          &          3.6           &  \\
-		\textcolor{cyan}{•}Mamba3D\textcolor{magenta}{*}\cite{Mamba3D}            &           ACM MM24           &                      Point-MAE                       &                     95.1                      &              \textbf{95.18}              &                  92.60                   &                  93.34                   &          16.9          &          3.9           &  \\
-		\textcolor{cyan}{•}Hybrid-Emba3D                              &              ~               &                      Point-MAE                       &   \textbf{95.58\textcolor{magenta}{+1.58}}    & 93.80\textbf{\textcolor{magenta}{+0.27}} & 93.12\textbf{\textcolor{magenta}{+0.87}} & 93.09\textbf{\textcolor{magenta}{+2.04}} &         16.96          &          3.95          &  \\
-		\textcolor{cyan}{•}Hybrid-Emba3D\textcolor{magenta}{*}        &              ~               &                      Point-MAE                       &   \textbf{95.99\textcolor{magenta}{+1.99}}    & \textbf{95.18\textcolor{magenta}{+1.38}} & \textbf{93.80\textcolor{magenta}{+1.55}} & \textbf{94.34\textcolor{magenta}{+3.29}} &         16.96          &          3.95          &  \\ \bottomrule
-	\end{tabular}
-}
-
-
-	\label{tab1}
-\end{table*}
+**Key**:
+- *: Voting strategy applied
