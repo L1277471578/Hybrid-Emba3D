@@ -7,7 +7,7 @@ We will release the code and weights soon!
 
 ## To do
 - ✅ Publish training and testing logs
-- ✅ Release [pretraining](https://github.com/L1277471578/Hybrid-Emba3D/releases/download/v1.0/weights.pth) and finetune weights
+- ✅ Release [pretraining](https://github.com/L1277471578/Hybrid-Emba3D/releases/download/v1.0/pretrain_pointmae.pth) and finetune weights
 - ⏳ release the model and evaluation code...
 
 ## Experimental Results on ModelNet40 and ScanObjectNN
