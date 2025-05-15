@@ -3,6 +3,9 @@ Hybrid-Emba3D: Geometry-Aware and Cross-Path Feature Hybrid Enhanced State Space
 
 We will release the code and weights soon!
 
+<img src="https://github.com/user-attachments/assets/9246357d-b01f-45b3-ac42-7d6da7ed6167" width="850" >
+
+
 ## Experimental Results on ModelNet40 and ScanObjectNN
 This table compares the performance of different 3D point cloud architectures on ModelNet40 and ScanObjectNN datasets. Our Hybrid-Emba3D achieves state-of-the-art results with:
 - 🏆95.99% accuracy on ModelNet40
