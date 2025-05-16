@@ -3,8 +3,6 @@ Hybrid-Emba3D: Geometry-Aware and Cross-Path Feature Hybrid Enhanced State Space
 
 We will release the code and weights soon!
 
-<img src="https://github.com/user-attachments/assets/9246357d-b01f-45b3-ac42-7d6da7ed6167" width="850" >
-
 ## To do
 - ✅ Publish training and testing logs
 - ✅ Release [pretraining](https://github.com/L1277471578/Hybrid-Emba3D/releases/download/v1.0/pretrain_pointmae.pth) and finetune weights
