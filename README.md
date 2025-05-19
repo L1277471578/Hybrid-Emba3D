@@ -1,5 +1,7 @@
 # Hybrid-Emba3D: Geometry-Aware and Cross-Path Feature Hybrid Enhanced State Space Model for Point Cloud Classification
 
+[[paper]](https://arxiv.org/abs/2505.11099) 
+
 We will release the code and weights soon!
 
 ## To do
